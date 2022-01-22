@@ -2,6 +2,9 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 export const Navbar = () => (
+
+
+
     <nav className="navbar navbar-dark bg-primary navbar-expand-lg px-4">
         <div className="navbar-brand">
             Github Поиск
