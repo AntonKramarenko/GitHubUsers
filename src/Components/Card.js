@@ -1,20 +1,23 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 
-export const Card = (props) => (
-    // console.log(props)
+export const Card = (props) => {
 
-    < div className="card" style={{ width: "18rem" }} >
-        < img src={props.user.avatar_url} className="card-img-top" alt={props.user.login} />
-        <div className="card-body m-auto ">
-            <h5 className="card-title text-center mb-2">{props.user.login}</h5>
-            <div className="btn-group-vertical">
-                <NavLink to={'/profile/' + props.user.login} className="btn btn-primary mb-2">User information</NavLink>
+    const onclick = (e) => {
+        window.location.assign('http://localhost:3000/profile/' + props.user.login);
+
+    }
+
+    return (
+        <div className="card" style={{ width: "18rem", textDecoration: 'none', color: 'black' }} >
+            <img src={props.user.avatar_url} className="card-img-top" alt={props.user.login} onClick={onclick} />
+            <div className="card-body m-auto">
+                <h5 onClick={onclick} className="card-title text-center">{props.user.login}</h5>
                 <button
                     type="button"
-                    className="btn btn-primary"
-                    onClick={() => {
+                    className="btn btn-primary "
+                    onClick={(e) => {
                         props.selectUser(props.user)
                         props.useStorage()
                     }}
@@ -23,6 +26,10 @@ export const Card = (props) => (
             </div>
 
         </div>
-    </div >
-)
+
+
+
+    )
+
+}
 

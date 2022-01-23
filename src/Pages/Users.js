@@ -39,7 +39,7 @@ export const Users = () => {
                 {serchUser().map(user => {
                     return (
                         <div className="col-sm-4 mb-4" key={user.id}>
-                            <Card user={user} buttonName='Select user' selectUser={userArrayAdd} useStorage={saveToStorage} />
+                            <Card user={user} buttonName='Select user' selectedUsers={selectedUsers} selectUser={userArrayAdd} useStorage={saveToStorage} />
                         </div>
                     )
                 })}

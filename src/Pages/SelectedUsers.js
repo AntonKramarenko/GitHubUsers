@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Card } from "../Components/Card";
-import { Navbar } from "../Components/Navbar";
 import { NoSelectUser } from "../Components/NoSelectUser";
 import { Search } from "../Components/Search";
 
@@ -42,13 +41,16 @@ export const SelectedUsers = () => {
         <Fragment>
             {selectedUsers !== null || undefined
                 ? <Fragment>
-                    <Search onChange={handleInput} value={value} />
-                    <button
-                        type="button"
-                        className="btn btn-outline-primary text-center w-100 mb-4"
-                        onClick={() => removeAllUsers()}
-                    >Delete all Users</button>
-
+                    {isEmpty &&
+                        <>
+                            <Search onChange={handleInput} value={value} />
+                            <button
+                                type="button"
+                                className="btn btn-outline-primary text-center w-100 mb-4"
+                                onClick={() => removeAllUsers()}
+                            >Delete all Users
+                            </button>
+                        </>}
                     <div className="row">
                         {serchUser().map(user =>
                         (<div className="col-sm-4 mb-4" key={user.id}>
@@ -56,10 +58,11 @@ export const SelectedUsers = () => {
                         </div>))}
                     </div>
                 </Fragment>
-                : <NoSelectUser />}
-        </Fragment >
-
+                : null}
+            {!storage.length && <NoSelectUser />}
+        </Fragment>
     )
+
 }
 
 

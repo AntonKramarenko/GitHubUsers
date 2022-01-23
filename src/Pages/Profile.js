@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Fragment } from "react/cjs/react.production.min";
+import { useParams } from "react-router-dom";
+
 
 
 export const Profile = () => {
@@ -55,7 +55,13 @@ export const Profile = () => {
                                 blog
                                     ? <li>
                                         <strong>Blog: </strong>
-                                        {blog}</li>
+                                        <a
+                                            href={blog}
+                                            target={"_blank"}
+                                            className="link-primary"
+                                        >{blog}</a>
+
+                                    </li>
                                     : null
                             }
                         </ul>
