@@ -19,7 +19,7 @@ export const Users = () => {
 
     const serchUser = () => {
         return users.filter(user => {
-            if (user.login.toLowerCase().includes(value.toLowerCase().trim()) || !value.length) {
+            if (user.login.toLowerCase().includes(value.toLowerCase().trim()) || user.node_id.includes(value.trim())) {
                 return user;
             }
         })

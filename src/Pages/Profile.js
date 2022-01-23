@@ -6,7 +6,6 @@ import { Fragment } from "react/cjs/react.production.min";
 export const Profile = () => {
     const userLink = useParams()
     const url = 'https://api.github.com/users/' + userLink.name
-    console.log(url)
 
 
     const [user, setUser] = useState([])
@@ -27,7 +26,7 @@ export const Profile = () => {
                         <img
                             src={avatar_url}
                             alt={name}
-                            className="col-12" />
+                            className="img-fluid rounded-start" />
                     </div>
                     <div className="col">
                         <h1>{name}</h1>
@@ -70,7 +69,7 @@ export const Profile = () => {
                     <a
                         href={html_url}
                         target={"_blank"}
-                        className="btn btn-outline-dark col-12 mt-4"
+                        className="btn btn-primary col-12 mt-2"
                     >Open profile</a>
                 </div>
             </div>

@@ -28,7 +28,7 @@ export const SelectedUsers = () => {
 
     const serchUser = () => {
         return selectedUsers.filter(user => {
-            if (user.login.toLowerCase().includes(value.toLowerCase().trim())) {
+            if (user.login.toLowerCase().includes(value.toLowerCase().trim()) || user.node_id.includes(value.trim())) {
                 return user;
             }
         })
