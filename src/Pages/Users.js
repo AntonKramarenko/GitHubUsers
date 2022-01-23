@@ -24,7 +24,6 @@ export const Users = () => {
             }
         })
     }
-
     const saveToStorage = () => {
         storage.setItem('users', JSON.stringify(selectedUsers))
     }
@@ -40,7 +39,7 @@ export const Users = () => {
                 {serchUser().map(user => {
                     return (
                         <div className="col-sm-4 mb-4" key={user.id}>
-                            <Card user={user} buttonName='Select user' selectedUser={userArrayAdd} useStorage={saveToStorage} />
+                            <Card user={user} buttonName='Select user' selectUser={userArrayAdd} useStorage={saveToStorage} />
                         </div>
                     )
                 })}

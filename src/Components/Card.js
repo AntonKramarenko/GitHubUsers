@@ -11,15 +11,15 @@ export const Card = (props) => (
             <h5 className="card-title text-center mb-4">{props.user.login}</h5>
             <div className="btn-group-vertical">
                 <Link to={'/profile/' + props.user.login} className="btn btn-primary mb-2">User information</Link>
-                {<button
+                <button
                     type="button"
                     className="btn btn-primary"
                     onClick={() => {
-                        props.selectedUser(props.user)
+                        props.selectUser(props.user)
                         props.useStorage()
                     }}
                 >{props.buttonName}
-                </button>}
+                </button>
             </div>
 
         </div>
