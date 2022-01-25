@@ -5,11 +5,10 @@ import { Search } from "../Components/Search";
 
 
 
-export const SelectedUsers = (props) => {
+export const SelectedUsers = () => {
     const [selectedUsers, setSelectedUsers] = useState([])
     const [isEmpty, setIsEmpty] = useState(true)
     const [value, setValue] = useState('')
-    const [deleteID, setDeleteID] = useState()
 
     const storage = window.localStorage
 
@@ -29,7 +28,7 @@ export const SelectedUsers = (props) => {
 
     const handleInput = (e) => setValue(e.target.value)
 
-    const serchUser = () => {
+    const searchUser = () => {
         return selectedUsers.filter(user => {
             if (user.login.toLowerCase().includes(value.toLowerCase().trim()) || user.node_id.includes(value.trim())) {
                 return user;
@@ -37,19 +36,16 @@ export const SelectedUsers = (props) => {
         })
     }
 
-    //// delete user 
     const saveToStorage = (saveItem) => {
         storage.setItem('users', JSON.stringify(saveItem))
     }
 
-    const findDeleteUser = () => {
-        const filteredUsers = selectedUsers.filter(user => user.id !== 3) //нужно получить ід вибранго пользователя
+    const findDeleteUser = (user) => {
+        const { id } = user
+        const filteredUsers = selectedUsers.filter(user => user.id !== id)
         setSelectedUsers(filteredUsers)
         saveToStorage(filteredUsers)
     }
-
-
-
 
     return (
         <Fragment>
@@ -66,9 +62,9 @@ export const SelectedUsers = (props) => {
                             </button>
                         </>}
                     <div className="row">
-                        {serchUser().map(user =>
+                        {searchUser().map(user =>
                         (<div className="col-sm-2 mb-4" key={user.id}>
-                            <Card user={user} buttonName='Delete user' selectUser={findDeleteUser} />
+                            <Card user={user} buttonName='Delete user' selectUser={() => findDeleteUser(user)} />
                         </div>))}
                     </div>
                 </Fragment>

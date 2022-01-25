@@ -18,6 +18,15 @@ export const Profile = () => {
         name, company, avatar_url, location, blog, login, html_url, followers, following, public_repos, public_gists
     } = user
 
+    const userData = [
+        { id: 0, className: 'badge bg-primary me-2 p-3', title: 'Followers:', data: followers },
+        { id: 1, className: 'badge bg-success me-2 p-3', title: 'Following:', data: following },
+        { id: 2, className: 'badge bg-info me-2 p-3', title: 'Repositories:', data: public_repos },
+        { id: 3, className: 'badge bg-dark me-2 p-3', title: 'Gists:', data: public_gists },
+
+    ]
+
+
     return (
         <div className="card mb-4">
             <div className="card-body">
@@ -64,12 +73,9 @@ export const Profile = () => {
                                     : null
                             }
                         </ul>
-
-                        <span className="badge bg-primary me-2 p-3 ">Followers: {followers} </span>
-                        <span className="badge bg-success me-2 p-3">Following: {following} </span>
-                        <span className="badge bg-info me-2 p-3">Repositorias: {public_repos} </span>
-                        <span className="badge bg-dark me-2 p-3">Gists: {public_gists} </span>
-
+                        {userData.map(user => (
+                            <span className={user.className}>{user.title} {user.data} </span>
+                        ))}
                     </div>
                     <a
                         href={html_url}

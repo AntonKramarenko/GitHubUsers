@@ -39,7 +39,7 @@ export const Users = () => {
     return (
         <Fragment>
             <Search onChange={handleInput} value={value} />
-            <div className="row">
+            <div className="row px-5">
                 {serchUser().map(user => {
                     return (
                         <div className="col-sm-2 mb-4" key={user.id}>
