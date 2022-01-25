@@ -8,8 +8,10 @@ export const Users = () => {
     const storage = window.localStorage
     const selectedUsers = []
 
+
     const [users, setUsers] = useState([])
     const [value, setValue] = useState('')
+
 
     useEffect(() => {
         fetch(url).then(res => res.json().then(data => setUsers(data)))
@@ -32,14 +34,16 @@ export const Users = () => {
         selectedUsers.push(user)
     }
 
+
+
     return (
         <Fragment>
             <Search onChange={handleInput} value={value} />
             <div className="row">
                 {serchUser().map(user => {
                     return (
-                        <div className="col-sm-4 mb-4" key={user.id}>
-                            <Card user={user} buttonName='Select user' selectedUsers={selectedUsers} selectUser={userArrayAdd} useStorage={saveToStorage} />
+                        <div className="col-sm-2 mb-4" key={user.id}>
+                            <Card user={user} buttonName='Select user' selectUser={userArrayAdd} useStorage={saveToStorage} />
                         </div>
                     )
                 })}

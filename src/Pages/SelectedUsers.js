@@ -4,19 +4,23 @@ import { NoSelectUser } from "../Components/NoSelectUser";
 import { Search } from "../Components/Search";
 
 
-export const SelectedUsers = () => {
+
+export const SelectedUsers = (props) => {
     const [selectedUsers, setSelectedUsers] = useState([])
     const [isEmpty, setIsEmpty] = useState(true)
     const [value, setValue] = useState('')
+    const [deleteID, setDeleteID] = useState()
 
     const storage = window.localStorage
-    // setSelectedUsers(JSON.parse(storage.getItem('users')))
 
     const removeAllUsers = () => {
-        storage.removeItem('users')
+        removeUsersStorage()
         setSelectedUsers([])
         setIsEmpty(false)
+    }
 
+    const removeUsersStorage = () => {
+        storage.removeItem('users')
     }
 
     useEffect(() => {
@@ -33,6 +37,16 @@ export const SelectedUsers = () => {
         })
     }
 
+    //// delete user 
+    const saveToStorage = (saveItem) => {
+        storage.setItem('users', JSON.stringify(saveItem))
+    }
+
+    const findDeleteUser = () => {
+        const filteredUsers = selectedUsers.filter(user => user.id !== 3) //нужно получить ід вибранго пользователя
+        setSelectedUsers(filteredUsers)
+        saveToStorage(filteredUsers)
+    }
 
 
 
@@ -53,78 +67,14 @@ export const SelectedUsers = () => {
                         </>}
                     <div className="row">
                         {serchUser().map(user =>
-                        (<div className="col-sm-4 mb-4" key={user.id}>
-                            <Card user={user} buttonName='Delete user' />
+                        (<div className="col-sm-2 mb-4" key={user.id}>
+                            <Card user={user} buttonName='Delete user' selectUser={findDeleteUser} />
                         </div>))}
                     </div>
                 </Fragment>
                 : null}
-            {!storage.length && <NoSelectUser />}
+            {!selectedUsers?.length && <NoSelectUser />}
         </Fragment>
     )
 
 }
-
-
-// import React, { Fragment, useEffect, useState } from "react";
-// import { Card } from "../Components/Card";
-// import { Search } from "../Components/Search";
-
-
-// export const Users = () => {
-//     const url = 'https://api.github.com/users'
-//     const storage = window.localStorage
-
-//     const [users, setUsers] = useState([])
-//     const [value, setValue] = useState('')
-
-//     useEffect(() => {
-//         fetch(url).then(res => res.json().then(data => setUsers(data)))
-//     }, [])
-
-//     const handleInput = (e) => setValue(e.target.value)
-
-//     const serchUser = () => {
-//         return users.filter(user => {
-//             if (user.login.toLowerCase().includes(value.toLowerCase()) || !value.length) {
-//                 return user;
-//             }
-//         })
-//     }
-
-//     let selected = storage.getItem('users')
-//     console.log(JSON.parse(selected))
-
-
-
-//     const selectedUsers = []
-
-//     return (
-//         <Fragment>
-//             <Search onChange={handleInput} value={value} />
-//             <div className="row">
-//                 {serchUser().map(user => {
-//                     return (
-//                         <div className="col-sm-4 mb-4" key={user.id}>
-//                             <Card id={user.id} avatar={user.avatar_url} login={user.login} />
-//                             <button
-//                                 onClick={() => {
-//                                     selectedUsers.push(user)
-//                                     console.log(selectedUsers)
-//                                     storage.setItem('users', JSON.stringify(selectedUsers))
-//                                 }}
-//                             >  test</button>
-//                             <button
-//                                 onClick={() => {
-//                                     console.log()
-//                                 }}
-//                             >
-//                                 console
-//                             </button>
-//                         </div>
-//                     )
-//                 })}
-//             </div>
-//         </Fragment>
-//     )
-// }

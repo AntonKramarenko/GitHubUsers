@@ -32,7 +32,6 @@ export const Profile = () => {
                         <h1>{name}</h1>
                         <ul>
                             {location
-
                                 ? <li>
                                     <strong>Location: </strong>
                                     {location} </li>

@@ -1,33 +1,37 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 export const Card = (props) => {
+    const [userID, setUserId] = useState()
+    const [disable, setDisable] = useState(false)
 
-    const onclick = (e) => {
-        window.location.assign('http://localhost:3000/profile/' + props.user.login);
 
-    }
 
     return (
-        <div className="card" style={{ width: "18rem", textDecoration: 'none', color: 'black' }} >
-            <img src={props.user.avatar_url} className="card-img-top" alt={props.user.login} onClick={onclick} />
-            <div className="card-body m-auto">
-                <h5 onClick={onclick} className="card-title text-center">{props.user.login}</h5>
-                <button
-                    type="button"
-                    className="btn btn-primary "
-                    onClick={(e) => {
-                        props.selectUser(props.user)
-                        props.useStorage()
-                    }}
-                >{props.buttonName}
-                </button>
+        <Link to={'/profile/' + props.user.login} >
+            <div className="card" style={{ width: "10rem", textDecoration: 'none', color: 'black' }} >
+                <img src={props.user.avatar_url} className="card-img-top" alt={props.user.login} />
+                <div className="card-body m-auto" >
+                    <h5 className="card-title text-center">{props.user.login}</h5>
+                    {disable
+                        ? <button type="button" className="btn btn-secondary" onClick={(event) => event.preventDefault()} >User Select</button>
+                        : <button
+                            type="button"
+                            className="btn btn-primary "
+                            onClick={(event) => {
+                                event.preventDefault()
+                                props.selectUser(props.user)
+                                props.useStorage()//change "use"
+                                setUserId(props.user.id)
+
+                                setDisable(true)
+                            }}
+                        >{props.buttonName}
+                        </button>}
+                </div>
             </div>
-
-        </div>
-
-
+        </Link >
 
     )
 
